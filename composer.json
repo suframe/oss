@@ -19,7 +19,7 @@
         "suframe\\oss\\OssService"
       ],
       "config": {
-        "thinkAdmin": "src/config/oss.php"
+        "oss": "src/config/oss.php"
       }
     }
   },
