@@ -1,6 +1,12 @@
 # oss
 thinkphp6 oss库
 
+文档地址：[https://www.kancloud.cn/taobao/suframe/1771043](https://www.kancloud.cn/taobao/suframe/1771043)   
+开发交流QQ群：647344518   [立即加群](http://shang.qq.com/wpa/qunwpa?idkey=83a58116f995c9f83af6dc2b4ea372e38397349c8f1973d8c9827e4ae4d9f50e)     
+项目地址： [https://github.com/suframe/think-admin](https://github.com/suframe/think-admin)  
+体验地址： [http://thinkadmin.zacms.com/thinkadmin/main/index.html](http://thinkadmin.zacms.com/thinkadmin/main/index.html)  账户：admin,密码：admin,**请勿乱更改信息**
+案例体验地址： [http://mall.zacms.com/admin](http://mall.zacms.com/admin)  账户：admin,密码：admin,**请勿乱更改信息,未完成开发，完成后开源**
+
 ### 实现功能：
 - 七牛服务器上传文件
 - 阿里os（待接入）
