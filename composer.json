@@ -1,0 +1,30 @@
+{
+  "name": "suframe/think-oss",
+  "description": "suframe thinkphp oss",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "qian",
+      "email": "330576744@qq.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "suframe\\oss\\": "src"
+    }
+  },
+  "extra": {
+    "think": {
+      "services": [
+        "suframe\\oss\\OssService"
+      ],
+      "config": {
+        "thinkAdmin": "src/config/oss.php"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+  }
+}
