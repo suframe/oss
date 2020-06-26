@@ -35,6 +35,21 @@ class QiNiu implements OssDriverInterface
         return $this->token[$bucket] = $token;
     }
 
+    public function getParams()
+    {
+        $bucket = \request()->post('bucket', config('oss.qiniu.bucketDefault'));
+        $urls = config('oss.qiniu.bucket');
+        $bucketUrl = $urls[$bucket] ?? '';
+        if (!$bucketUrl) {
+            throw new \Exception('need bucket url config');
+        }
+        $token = $this->getToken($bucket);
+        return [
+            'upload_token' => $token,
+            'url' => $bucketUrl,
+        ];
+    }
+
     /**
      * @return \think\response\Json
      * @throws \Exception
@@ -45,26 +60,23 @@ class QiNiu implements OssDriverInterface
         if (!$file) {
             return json_error('upload empty');
         }
-        $bucket = \request()->post('bucket', config('oss.qiniu.bucketDefault'));
-        $urls = config('oss.qiniu.bucket');
-        $bucketUrl = $urls[$bucket] ?? '';
-        if (!$bucketUrl) {
-            return json_error('need bucket url config');
+        try {
+            $params = $this->getParams();
+        } catch (\Exception $e) {
+            return json_error($e->getMessage());
         }
-        $token = $this->getToken($bucket);
         $uploadMgr = new UploadManager();
-
         $fileName = $file->hashName(function () {
             return date('Ymd') . md5(((string)microtime(true)) . uniqid());
         });
-        list($ret, $err) = $uploadMgr->putFile($token, $fileName, $file->getRealPath());
+        list($ret, $err) = $uploadMgr->putFile($params['upload_token'], $fileName, $file->getRealPath());
         trace($err);
         if ($err !== null) {
             return json_error($err);
         }
         return json_return([
             'id' => $ret['hash'],
-            'filePath' => $bucketUrl . '/' . $fileName,
+            'filePath' => $params['url'] . '/' . $fileName,
         ]);
     }
 
